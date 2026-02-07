@@ -1,0 +1,13 @@
+package com.servicenest.repository;
+
+import com.servicenest.model.ServiceRequest;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface ServiceRequestRepository extends JpaRepository<ServiceRequest, Long> {
+
+    List<ServiceRequest> findByVendorIdAndStatus(Long vendorId, String status);
+
+    List<ServiceRequest> findByVendorId(Long vendorId);
+}

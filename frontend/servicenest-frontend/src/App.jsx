@@ -5,10 +5,10 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import VendorCompleteProfile from "./pages/VendorCompleteProfile";
 import AdminDashboard from "./pages/AdminDashboard";
-import UserHome from "./pages/UserHome";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import VendorRoutes from "./routes/VendorRoutes"; // ✅ IMPORTANT
+import UserRoutes from "./routes/UserRoutes";
 
 function App() {
   return (
@@ -40,10 +40,10 @@ function App() {
 
       {/* User */}
       <Route
-        path="/user/home"
+        path="/user/*"
         element={
           <ProtectedRoute role="USER">
-            <UserHome />
+            <UserRoutes />
           </ProtectedRoute>
         }
       />

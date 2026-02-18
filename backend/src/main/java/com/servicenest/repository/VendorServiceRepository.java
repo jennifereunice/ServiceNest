@@ -12,6 +12,9 @@ public interface VendorServiceRepository extends JpaRepository<VendorService, Lo
     List<VendorService> findByVendor(VendorDetails vendor);
 
     List<VendorService> findByAvailableTrue();
+    
+    List<VendorService> findByCategoryAndAvailableTrue(String category); // optional filter by type
+
 
     // ✅ FIXED METHOD NAME
     Optional<VendorService> findByIdAndVendor_Id(

@@ -13,9 +13,8 @@ API.interceptors.request.use((req) => {
 });
 
 export const getRequests = (vendorId, status) =>
-  API.get(`/vendor/requests/${vendorId}`, {
-    params: { status },
-  });
+  API.get(`/vendor/requests/${status}`, { params: { vendorUserId: vendorId } });
+
 
 export const acceptRequest = (id) =>
   API.put(`/vendor/requests/${id}/accept`);

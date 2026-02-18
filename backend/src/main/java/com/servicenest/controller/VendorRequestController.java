@@ -18,13 +18,14 @@ public class VendorRequestController {
     }
 
     // View requests (Pending / Accepted / Completed)
-    @GetMapping("/{vendorId}")
+    @GetMapping("/{status}")
     public List<ServiceRequest> getRequests(
-            @PathVariable Long vendorId,
-            @RequestParam(required = false) String status) {
+            @PathVariable String status,
+            @RequestParam Long vendorUserId) {
 
-        return requestService.getVendorRequests(vendorId, status);
+        return requestService.getVendorRequests(vendorUserId, status);
     }
+
 
     @PutMapping("/{id}/accept")
     public void accept(@PathVariable Long id) {

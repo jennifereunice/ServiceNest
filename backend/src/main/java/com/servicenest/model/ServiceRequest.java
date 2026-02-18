@@ -8,8 +8,15 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "service_requests")
+@Table(
+    name = "service_requests",
+    uniqueConstraints = @UniqueConstraint(
+        columnNames = {"user_id", "service_id"}
+    )
+)
 @Getter @Setter @NoArgsConstructor
+
+
 public class ServiceRequest {
 
     @Id

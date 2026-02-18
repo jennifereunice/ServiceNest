@@ -19,12 +19,20 @@ public class ServiceRequestService {
     }
 
     // Vendor views requests by status
-    public List<ServiceRequest> getVendorRequests(Long vendorId, String status) {
-        if (status == null) {
-            return requestRepo.findByVendorId(vendorId);
+    public List<ServiceRequest> getVendorRequests(Long vendorUserId, String status) {
+
+        // 1. Get vendor details
+        VendorDetails vendor = vendorRepo.findByUserId(vendorUserId)
+                .orElseThrow(() -> new RuntimeException("Vendor not found"));
+
+        // 2. Fetch requests for services of this vendor
+        if (status != null) {
+            return requestRepo.findByService_VendorAndStatus(vendor, status);
+        } else {
+            return requestRepo.findByService_Vendor(vendor);
         }
-        return requestRepo.findByVendorIdAndStatus(vendorId, status);
     }
+
 
     // Accept request
     public void acceptRequest(Long requestId) {

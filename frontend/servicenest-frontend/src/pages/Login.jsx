@@ -22,7 +22,7 @@ const Login = () => {
 console.log("the role is "+role);
       if (role === "ADMIN") navigate("/admin/dashboard");
       else if (role === "VENDOR") navigate("/vendor/dashboard");
-      else navigate("/user/home");
+      else navigate("/user/dashboard");
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
     }

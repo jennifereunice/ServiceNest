@@ -1,0 +1,42 @@
+name: ServiceNest CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # ---------- BACKEND BUILD ----------
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Build Backend
+        run: |
+          cd backend
+          mvn clean package -DskipTests
+
+      # ---------- FRONTEND BUILD ----------
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build Frontend
+        run: |
+          cd frontend
+          npm install
+          npm run build
+
+      # ---------- DOCKER BUILD ----------
+      - name: Build Docker Images
+        run: docker compose build

@@ -33,10 +33,11 @@ jobs:
 
       - name: Build Frontend
         run: |
-          cd frontend
+          cd frontend/servicenest-frontend
           npm install
           npm run build
 
       # ---------- DOCKER BUILD ----------
       - name: Build Docker Images
         run: docker compose build
+
